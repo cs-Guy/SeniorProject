@@ -24,7 +24,7 @@ face_aligner = openface.AlignDlib(alignFile)
 
 # read image
 
-image = cv2.imread("./test/test3.jpg")
+image = cv2.imread("./TrainImages/1.png")
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 # check for existing images
@@ -33,7 +33,7 @@ file_count = len(files)
 print(file_count)
 
 (h, w) = image.shape[:2]
-blob = cv2.dnn.blobFromImage(cv2.resize(image, (300, 300)), 1.0,(300, 300), (104.0, 177.0, 123.0))
+blob = cv2.dnn.blobFromImage(cv2.resize(image, (150, 150)), 1.0,(150, 150), (104.0, 177.0, 123.0))
     
 net.setInput(blob)
 detections = net.forward()
@@ -60,13 +60,13 @@ for i in range(0, detections.shape[2]):
     #cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
     dlibBox = dlib.rectangle(left = startX,top = startY,right = endX,bottom = endY)
     aligned_face = fa.align(image, gray, dlibBox)
-    alignedFace = face_aligner.align(534, image, dlibBox, landmarkIndices=openface.AlignDlib.OUTER_EYES_AND_NOSE)
-
-img_name = "images/opencv_frame_{}.jpeg".format(file_count)
-cv2.imwrite(img_name, alignedFace) #image[startY:endY, startX:endX]
+    alignedFace = face_aligner.align(534, gray, dlibBox, landmarkIndices=openface.AlignDlib.OUTER_EYES_AND_NOSE)
+    alignedFace = cv2.resize(alignedFace,(150,150),interpolation = cv2.INTER_AREA)
+img_name = "images/{}.png".format(file_count)
+cv2.imwrite(img_name, image[startY:endY, startX:endX]) #image[startY:endY, startX:endX]
 print("{} written!".format(img_name))
 
-cv2.imshow("Frame", aligned_face)
+
     
 cv2.destroyAllWindows()
 # vs.stream.stream.release()
