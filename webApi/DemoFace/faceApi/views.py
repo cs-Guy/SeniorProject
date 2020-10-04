@@ -16,6 +16,7 @@ model = model_from_json(loaded_model_json)
 # load weights into new model
 model.load_weights('./models/model.h5')
 #make prediction
+
 def predict(img):
   target_image = image.load_img(img, target_size=(224, 224))
   img_pixels = image.img_to_array(target_image)
