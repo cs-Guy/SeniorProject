@@ -5,3 +5,5 @@ demo/venv/
 projectDemo/venv/
 demo/DemoAppFolder/prediction/model/model.h5
 demo/DemoAppFolder/prediction/model/model.json
+projectDemo/DemoAPIFolder/prediction/model/model.h5
+projectDemo/DemoAPIFolder/prediction/model/model.json
