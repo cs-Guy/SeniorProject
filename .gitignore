@@ -3,3 +3,5 @@ webApi/DemoFace/models/model.h5
 webApi/venv/
 demo/venv/
 projectDemo/venv/
+demo/DemoAppFolder/prediction/model/model.h5
+demo/DemoAppFolder/prediction/model/model.json
