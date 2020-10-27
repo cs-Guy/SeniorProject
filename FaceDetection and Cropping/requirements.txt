@@ -20,7 +20,7 @@ click==7.1.1
 cloudpickle==1.4.0
 cmake==3.17.2
 colorama==0.4.3
-cryptography==2.8
+cryptography==3.2
 decorator==4.4.2
 defusedxml==0.6.0
 diff-match-patch==20181111
