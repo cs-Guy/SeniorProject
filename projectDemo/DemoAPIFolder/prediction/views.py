@@ -26,38 +26,13 @@ def predictImage(request):
         return render(request,'index.html',r.json())
     return HttpResponse('Could not recieved data')
 
-# Create your views here.
-@api_view(['GET', 'POST'])
-def api_add(request):
-    sum = 0
-    response_dict = {}
-    if request.method == 'GET':
-        # Do nothing
-        pass
-    elif request.method == 'POST':
-        # Add the numbers
-        data = request.data
-        for key in data:
-            sum += data[key]
-        response_dict = {"sum": sum}
-    return Response(response_dict, status=status.HTTP_201_CREATED)
-
-class Add_Values(APIView):
-    def post(self, request, format=None):
-        sum = 0
-        # Add the numbers
-        data = request.data
-        for key in data:
-            sum += data[key]
-        response_dict = {"sum": sum}
-        return Response(response_dict, status=status.HTTP_201_CREATED)
-
 from .apps import PredictionConfig
 from tensorflow.keras.preprocessing import image
 import numpy as np
 
 def predict(img):
         target_image = image.load_img(img, target_size=(224, 224))
+        
         img_pixels = image.img_to_array(target_image)
         img_pixels = np.expand_dims(img_pixels, axis = 0)
         img_pixels /= 255

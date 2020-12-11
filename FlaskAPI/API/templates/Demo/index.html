@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block content_title %}App Demo{% endblock %}
+
+{% block content %}
+
+<center>
+    <h1>Application Demo</h1>
+</center>
+<br>
+<div>
+    <form method="POST" enctype="multipart/form-data" action="upload">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <center>
+                        <img id="imgId" src="#" alt="Image 1" style="max-width: 25vw;"/>
+                    </center>
+                </div>
+                <div class="col">
+                    <center>
+                        <img id="imgFace" src="#" alt="Image 2" style="max-width: 25vw;"/>
+                    </center>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div>
+                        <img>
+                        <label for="fimage">Upload First Image File:</label>
+                        <input name="id" type="file" id="id" onchange="previewImage1(event)" required>
+                    </div>
+                </div>
+                <div class="col">
+                    <div>
+                        <label for="simage">Upload Second Image File:</label>
+                        <input name="face" type="file" id="face" onchange="previewImage2(event)" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <center>
+                        <div>
+                            <label for="threshold">Set Threshold:</label>
+                            <input name="threshold" type="number" value={{threshold}} min="0" step=".01" required>
+                        </div>
+                    </center>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <center>
+                        <input type="submit" value="submit">
+                    </center>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% if message == "success" %}
+<center>
+    <div>
+        {% if distance %}
+        <h2>Distance of the two image is
+            {% if distance <= 0.5 %}
+            <span style="color:green">{{distance}}</span>
+            {% elif distance > 0.5 and distance <= 0.7 %}
+            <span style="color:orange">{{distance}}</span>
+            {% elif distance > 0.7 %}
+            <span style="color:red">{{distance}}</span>
+            {% endif %}
+        </h2>
+        {% endif %}
+
+        {% if result == 1 %}
+        <h2>The person in the two image are the same</h2>
+        {% elif result == 0 %}
+        <h2>The person in the two image are not the same</h2>
+        {% endif %}
+    </div>
+</center>
+{% else %}
+<center>
+    <div>
+        <h2>{{message}}</h2>
+    </div>
+</center>
+{% endif %}
+<script>
+    var previewImage1 = function (event) {
+        var preview = document.getElementById('imgId');
+        preview.src = URL.createObjectURL(event.target.files[0]);
+        preview.style.display = "block";
+    };
+
+    var previewImage2 = function (event) {
+        var preview = document.getElementById('imgFace');
+        preview.src = URL.createObjectURL(event.target.files[0]);
+        preview.style.display = "block";
+    };
+</script>
+
+{% endblock %}

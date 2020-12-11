@@ -12,10 +12,12 @@ class PredictionConfig(AppConfig):
     # load model
     loaded_model_json = json_file.read()
     json_file.close()
-
     model = model_from_json(loaded_model_json)
+
+    print('model loaded successfully')
     # load weights into new model
     model.load_weights(weight_file)
+    print('model weights loaded successfully')
 
     
 
